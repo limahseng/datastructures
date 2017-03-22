@@ -31,11 +31,9 @@ class LinkedList:
 
     def insert(self, data, position=0):
         n = Node(data) # new node n with data value = data and link value = None
-        # if empty linked list
-        if self.head is None:
+        if self.head is None: # if empty linked list
             self.head = n
-        # non-empty linked list
-        else:
+        else: # non-empty linked list
             # insert to front
             if position == 0:
                 n.link = self.head
@@ -56,6 +54,40 @@ class LinkedList:
                 n.link = curr
                 prev.link = n
 
+    def search(self, target):
+        curr = self.head
+        while (curr is not None) and (curr.data != target):
+            curr = curr.link
+        if curr is not None:
+            print("Found!")
+        else:
+            print("Not found.")
+
+    def delete(self, target=None, position=None):
+        if self.head is None: # empty linked list
+            print("Cannot delete from empty linked list.")
+        else: # non-empty linked list
+            if target is not None: # assume distinct values
+                prev = self.head
+                curr = self.head
+                while (curr is not None) and (curr.data != target):
+                    prev = curr
+                    curr = curr.link
+                if curr is not None: # found
+                    prev.link = curr.link # delete by bypassing curr
+                else:
+                    print("Not found.")
+            else: # assume position is valid
+                prev = self.head
+                curr = self.head
+                for i in range(position):
+                    prev = curr
+                    curr = curr.link
+                prev.link = curr.link # delete by bypassing curr
+
+    def update(self, old_value, new_value):
+        pass
+
     def display(self):
         if self.head is None: # empty linked list
             print("Empty linked list")
@@ -72,3 +104,8 @@ ll.insert(2,0) # insert to front
 ll.insert(3,ll.size()) # insert to rear
 ll.insert(4,1) # insert in between
 ll.display()
+ll.search(3)
+ll.search(5)
+ll.delete(3)
+ll.display()
+ll.delete(5)

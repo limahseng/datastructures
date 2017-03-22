@@ -8,6 +8,9 @@
 
 # linked list
 # - dynamic memory allocation
+# - (more) efficient to insert/delete
+# - high(er) cost to search (linear)
+# - more flexible/efficient storage
 
 class Node:
 
@@ -86,8 +89,17 @@ class LinkedList:
                 prev.link = curr.link # delete by bypassing curr
 
     def update(self, old_value, new_value):
-        pass
-
+        if self.head is None: # empty linked list
+            print("Empty linked list")
+        else: # non-empty linked list
+        curr = self.head
+        while (curr is not None) and (curr.data != old_value):
+            curr = curr.link
+        if curr is not None: # found
+            curr.data = new_value
+        else:
+            print("Not found.")
+            
     def display(self):
         if self.head is None: # empty linked list
             print("Empty linked list")
@@ -103,9 +115,12 @@ ll.insert(1) # insert to empty linked list
 ll.insert(2,0) # insert to front
 ll.insert(3,ll.size()) # insert to rear
 ll.insert(4,1) # insert in between
-ll.display()
+ll.display() # show contents after insertion
 ll.search(3)
 ll.search(5)
 ll.delete(3)
 ll.display()
 ll.delete(5)
+ll.update(2,7)
+ll.display()
+ll.update(5,7)

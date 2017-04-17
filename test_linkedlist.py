@@ -124,15 +124,3 @@ ll.delete(5)
 ll.update(2,7)
 ll.display()
 ll.update(5,7)
-
-
-
-    
-
-
-
-
-
-
-
-    

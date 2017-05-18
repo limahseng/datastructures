@@ -88,13 +88,46 @@ class BST:
         else:
             print("Not found")
 
-    def display(self):
+    def preorder(self): # Root Left Right
+        print(self.data, end=' ')        
         if self.left:
-            self.left.display()
+            self.left.preorder()
+        if self.right:
+            self.right.preorder()        
+
+    def postorder(self): # Left Right Root
+        if self.left:
+            self.left.postorder()
+        if self.right:
+            self.right.postorder()
+        print(self.data, end=' ')            
+
+    def inorder(self): # inorder traversal - Left Root Right
+        if self.left:
+            self.left.inorder()
         print(self.data, end=' ')
         if self.right:
-            self.right.display()
-          
+            self.right.inorder()
+
+    def reverse(self): # reverse traversal - Right Root Left
+        if self.right:
+            self.right.reverse()
+        print(self.data, end=' ')
+        if self.left:
+            self.left.reverse()
+
+    def minimum(self):
+        if self.left is None:
+            print("Minimum is", self.data)
+        else:
+            self.left.minimum()
+
+    def maximum(self):        
+        if self.right is None:
+            print("Maximum is", self.data)
+        else:
+            self.right.maximum()
+            
 # main
 bst = BST(50)
 bst.insert(30)
@@ -103,10 +136,21 @@ bst.insert(10)
 bst.insert(40)
 bst.insert(60)
 bst.insert(90)
-bst.display()
+bst.minimum()
+bst.maximum()
+print("Inorder: ", end='')
+bst.inorder()
 print()
-print(bst.search(30)) # found
-print(bst.search(20)) # not found
+print("Preorder: ", end='')
+bst.preorder()
+print()
+print("Postorder: ", end='')
+bst.postorder()
+print()
+print("Reverse: ", end='')
+bst.reverse()
+print(bst.search(30))
+print(bst.search(20))
 bst.delete(10) # node with 0 child
 bst.display()
 print()
